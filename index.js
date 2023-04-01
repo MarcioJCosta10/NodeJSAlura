@@ -1,32 +1,31 @@
-import fs from 'fs'
-import chalk from "chalk"
-import { log } from 'console'
+import fs from "fs";
+import chalk from "chalk";
+import { log } from "console";
 
-function trataErro(erro){
-    console.log(erro);
-throw new Error(chalk.red(erro.code, 'Não há arquivo no diretorio'))
+function trataErro(erro) {
+  throw new Error(chalk.red(erro.code, "Não há arquivo no diretorio"));
 }
 
-function getFil(filePath){
-    const encoding = 'utf-8'
-    fs.promises
-    .readFile(filePath, encoding,)
-    .then((texto)=>{console.log(chalk.green(texto))
-    .catch((trataErro))
-    })
-
+async function getFile(filePath) {
+  try {
+    const encoding = "utf-8";
+    const texto = await fs.promises.readFile(filePath, encoding);
+    console.log(chalk.green(texto));
+  } catch (e) {
+    trataErro(e);
+  } finally{
+    console.log(chalk.yellow("Operação concluída!"));
+  }
 }
 // function getFile(filePath){
 //     const encoding = 'utf-8'
-//     //para desconsiderar o primeiro parametro da função usamos o _ (_, texto)
-//     fs.readFile(filePath,encoding,(erro, texto)=>{
-
-//         if(erro){
-//             trataErro(erro)
-//         }
-
-//         console.log(chalk.green(texto))
+//     fs.promises
+//     .readFile(filePath, encoding,)
+//     .then((texto)=>{console.log(chalk.green(texto))
+//     .catch((trataErro))
 //     })
+
 // }
 
-getFile('./arquivos/')
+//getFile("./arquivos/texto.md");
+getFile("./arquivos/");
