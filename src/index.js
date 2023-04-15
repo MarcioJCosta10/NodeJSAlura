@@ -7,7 +7,7 @@ function extractLinks(texto) {
   // ... operador de espalhamento (spread operator )
   const captures = [...texto.matchAll(regex)];
   const results = captures.map((capture) => ({[capture[1]]:capture[2]}));
-  return results
+  return results.length !== 0 ? results:'Não há links no texto.'
 }
 
 function trataErro(erro) {
@@ -18,8 +18,7 @@ async function getFile(filePath) {
   try {
     const encoding = "utf-8";
     const texto = await fs.promises.readFile(filePath, encoding);
-    const links = extractLinks(texto);
-    console.log(links);
+    return extractLinks(texto); 
   } catch (e) {
     trataErro(e);
   } finally {
@@ -27,5 +26,5 @@ async function getFile(filePath) {
   }
 }
 
-getFile("./arquivos/texto.md");
+export default getFile;
 
