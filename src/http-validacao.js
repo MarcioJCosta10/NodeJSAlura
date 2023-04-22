@@ -12,7 +12,7 @@ async function checkUrl(listValidate) {
     listValidate.map(async (url) => {
       try {
         const response = await fetch(url);
-        return response.status;
+        return `${response.status} - ${response.statusText} - ${response.body} - ${response.headers} - ${response.ok} - ${response.redirected} - ${response.type} - ${response.url}`;
       } catch (e) {
         return manejaErros(e)
       }
