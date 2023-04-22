@@ -26,7 +26,9 @@ async function printList(validate, result,identifier='') {
 
 async function processText(argumentos) {
   const way = argumentos[2];
-  const valida = argumentos[3] === '--valida';
+  
+  //const valida = argumentos[3] === '--valida';
+  const valida = argumentos[3] === 'valida';
   try{
     fs.lstatSync(way)
   }catch(e){
